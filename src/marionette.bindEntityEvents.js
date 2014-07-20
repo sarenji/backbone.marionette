@@ -62,6 +62,11 @@
   function iterateEvents(target, entity, bindings, functionCallback, stringCallback) {
     if (!entity || !bindings) { return; }
 
+    // type-check bindings
+    if (!_.isFunction(bindings) && !_.isObject(bindings)) {
+      throw new Error('Bindings must be an object or function');
+    }
+
     // allow the bindings to be a function
     if (_.isFunction(bindings)) {
       bindings = bindings.call(target);
